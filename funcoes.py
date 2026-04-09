@@ -2,8 +2,10 @@
 Exercício de Programa 2 - Yahtzee
 Thiago Henrique e Frederico Gandini
 
-Número de horas desperdiçadas: 0.5
+Número de horas desperdiçadas: 1.5
 '''
+
+# ret = retorno
 
 # imports
 import random as rd 
@@ -25,12 +27,15 @@ def guardar_dado(lst_dados_rolados, lst_dados_guardados, i_dado_para_guardar):
     return lst_dados_rolados_guardados
 # função de remover dado
 def remover_dado(rolados, guardados, i):
+    # adiciona o dado sendo removido aos rolados
     rolados.append(guardados[i])
     guardados.pop(i)
     ret=[rolados, guardados]
     return ret
+#função pra cálculo dos pontos
 def calcula_pontos_regra_simples(rolados):
     ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
     for i in range(len(rolados)):
         ret[rolados[i]]+=1*rolados[i]
     return ret
+
