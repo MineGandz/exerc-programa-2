@@ -29,3 +29,8 @@ def remover_dado(rolados, guardados, i):
     guardados.pop(i)
     ret=[rolados, guardados]
     return ret
+def calcula_pontos_regra_simples(rolados):
+    ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+    for i in range(len(rolados)):
+        ret[rolados[i]]+=1*rolados[i]
+    return ret
