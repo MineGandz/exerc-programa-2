@@ -53,6 +53,7 @@ def calcula_pontos_soma(rolados):
     for num in rolados:
         c += num
     return c
+<<<<<<< HEAD
 
 def calcula_pontos_sequencia_baixa(rolados):
     seq_bxa=[[1,2,3,4], [2,3,4,5], [3,4,5,6]]
@@ -73,3 +74,5 @@ def calcula_pontos_sequencia_baixa(rolados):
     for i in range(len(rolados)):
         ret[rolados[i]]+=1
 ''' 
+=======
+>>>>>>> d8b53a3812e0813908ac93c8932d5bd6e0eac378
