@@ -95,4 +95,16 @@ def calcula_pontos_full_house(rolados):
     else:
         return 0
 
-            
+def calcula_pontos_quadra(rolados):
+    ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+    c=0
+    for i in range(len(rolados)):
+        ret[rolados[i]]+=1
+    for i in range(len(ret)):
+        if ret[i+1] >= 4:
+            c=0
+            for num in rolados:
+                c += num
+            return c
+    return 0
+        
