@@ -126,3 +126,18 @@ def calcula_pontos_regra_avancada(rolados):
         'sequencia_baixa': calcula_pontos_sequencia_baixa(rolados) 
     }
     return dic_pontuacao
+
+def faz_jogada(rolados, categoria, cartela_de_pontos):
+    e_inteiro=False
+    try:
+        int(categoria)
+        e_inteiro=True
+    except ValueError:
+        e_inteiro=False
+    if(e_inteiro):
+        simples=calcula_pontos_regra_simples(rolados)
+        cartela_de_pontos['regra_simples'][int(categoria)]+=simples[int(categoria)]+1
+    else:
+        avancada=calcula_pontos_regra_avancada(rolados)
+        cartela_de_pontos['regra_avancada'][categoria]+=avancada[categoria]+1
+    return cartela_de_pontos
