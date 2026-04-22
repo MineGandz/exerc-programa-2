@@ -107,4 +107,12 @@ def calcula_pontos_quadra(rolados):
                 c += num
             return c
     return 0
-        
+def calcula_pontos_quina(rolados):
+    ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+    c=0
+    for i in range(len(rolados)):
+        ret[rolados[i]]+=1
+    for i in range(len(ret)):
+        if ret[i+1] >= 5:
+            return 50
+    return 0
