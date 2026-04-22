@@ -1,8 +1,6 @@
 '''
 Exercício de Programa 2 - Yahtzee
 Thiago Henrique e Frederico Gandini
-
-Número de horas desperdiçadas: 2
 '''
 
 # ret = retorno
@@ -107,6 +105,7 @@ def calcula_pontos_quadra(rolados):
                 c += num
             return c
     return 0
+
 def calcula_pontos_quina(rolados):
     ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
     c=0
@@ -116,3 +115,14 @@ def calcula_pontos_quina(rolados):
         if ret[i+1] >= 5:
             return 50
     return 0
+
+def calcula_pontos_regra_avancada(rolados):
+    dic_pontuacao = {
+        'cinco_iguais': calcula_pontos_quina(rolados),
+        'full_house': calcula_pontos_full_house(rolados),
+        'quadra': calcula_pontos_quadra(rolados),
+        'sem_combinacao': calcula_pontos_soma(rolados),
+        'sequencia_alta': calcula_pontos_sequencia_alta(rolados),
+        'sequencia_baixa': calcula_pontos_sequencia_baixa(rolados) 
+    }
+    return dic_pontuacao
