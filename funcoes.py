@@ -31,11 +31,9 @@ def guardar_dado(lst_dados_rolados, lst_dados_guardados, i_dado_para_guardar):
 
 # função de remover dado
 def remover_dado(rolados, guardados, i):
-    # adiciona o dado sendo removido aos rolados
     rolados.append(guardados[i])
     guardados.pop(i)
-    ret=[rolados, guardados]
-    return ret
+    return guardados
     # retorno = lista de dados [rolados e guardados]
 
 #função pra cálculo dos pontos
@@ -45,7 +43,6 @@ def calcula_pontos_regra_simples(rolados):
         ret[rolados[i]]+=1*rolados[i]
     return ret
     # retorno = pontuação contribuída por cada número
-
 def calcula_pontos_soma(rolados):
     c=0
     for num in rolados:
@@ -77,7 +74,7 @@ def calcula_pontos_sequencia_alta(rolados):
                 return 30  
     return 0
 
-def calcula_pontos_full_house(rolados):
+def calcula_pontos_full_house(rolados):    
     ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
     for i in range(len(rolados)):
         ret[rolados[i]]+=1
@@ -92,6 +89,8 @@ def calcula_pontos_full_house(rolados):
         return trio+dupla
     else:
         return 0
+
+
 
 def calcula_pontos_quadra(rolados):
     ret={1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
@@ -135,9 +134,36 @@ def faz_jogada(rolados, categoria, cartela_de_pontos):
     except ValueError:
         e_inteiro=False
     if(e_inteiro):
+        categoria=int(categoria)
         simples=calcula_pontos_regra_simples(rolados)
-        cartela_de_pontos['regra_simples'][int(categoria)]+=simples[int(categoria)]+1
+        if(simples[categoria]>0):
+            cartela_de_pontos['regra_simples'][categoria]+=simples[categoria]+1
+        else:
+             cartela_de_pontos['regra_simples'][categoria]=0
+    
     else:
         avancada=calcula_pontos_regra_avancada(rolados)
-        cartela_de_pontos['regra_avancada'][categoria]+=avancada[categoria]+1
+        if(avancada[categoria]>0):
+            cartela_de_pontos['regra_avancada'][categoria]+=avancada[categoria]+1
+        else:
+            cartela_de_pontos['regra_avancada'][categoria]=0
+
     return cartela_de_pontos
+
+
+def imprime_cartela(cartela):
+    print("Cartela de Pontos:")
+    print("-"*25)    
+    for i in range(1, 7):
+        filler = " " * (15 - len(str(i)))
+        if cartela['regra_simples'][i] != -1:
+            print(f"| {i}: {filler}| {cartela['regra_simples'][i]:02} |")
+        else:
+            print(f"| {i}: {filler}|    |")
+    for i in cartela['regra_avancada'].keys():
+        filler = " " * (15 - len(str(i)))
+        if cartela['regra_avancada'][i] != -1:
+            print(f"| {i}: {filler}| {cartela['regra_avancada'][i]:02} |")
+        else:
+            print(f"| {i}: {filler}|    |")
+    print("-"*25)
